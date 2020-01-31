@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int main() {
+
+	int input;
+	int remainder;
+	
+	while (scanf("%d", &input) != EOF) {
+
+		int n = 1;
+		while (1) {
+			if (n * (n + 1) / 2 >= input)
+				break;
+			n++;
+		}
+		//printf("n:%d\n", n);
+		remainder = input - (n - 1)*n / 2;
+		//printf("re:%d\n", remainder);
+		if (n % 2 == 0)
+			printf("TERM %d IS %d/%d\n", input, remainder, n + 1 - remainder);
+		else
+			printf("TERM %d IS %d/%d\n", input, n + 1 - remainder, remainder);
+	}
+
+	//system("pause");
+	return 0;
+}
