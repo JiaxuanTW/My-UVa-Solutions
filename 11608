@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int main() {
+
+	int Question[12];
+	int Quiz[12];
+	int temp;
+	int remain;
+
+	while (1) {
+		
+		//Input
+		scanf("%d", &temp);
+		if (temp < 0)
+			break;
+		remain = temp;
+
+		for (int i = 0; i < 12; i++)
+			scanf("%d", &Question[i]);
+
+		for (int i = 0; i < 12; i++)
+			scanf("%d", &Quiz[i]);
+
+		//Process
+		for (int i = 0; i < 12; i++) {
+		
+			if (remain >= Quiz[i]) {
+				printf("No problem! :D\n");
+				remain -= Quiz[i];
+			}
+			else
+				printf("No problem. :(\n");
+
+			remain += Question[i];
+		}
+	}
+	system("pause");
+	return 0;
+}
