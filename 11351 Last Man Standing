@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int main() {
+
+	int people;
+	int kill;
+	int test;
+
+	scanf("%d", &test);
+
+	for (int i = 0; i < test; i++) {
+		
+		scanf("%d", &people);
+		scanf("%d", &kill);
+		
+		int prisoner[105] = { 0 };
+		int index = 0;
+		int counter = 0;
+		int killcounter = 0;
+
+		while (1) {
+
+			if (index == people) 
+				index = 0;
+			else if (prisoner[index] == 0 && counter < kill - 1) {
+				//printf("index:%d\n", index);
+				counter++;
+				index++;
+			}
+			else if (prisoner[index] == 0) {
+				counter = 0;
+				prisoner[index] = 1;
+				index++;
+				killcounter++;
+
+				//Test
+				//printf("index:%d has been killed!\n", index - 1);
+				//for (int i = 0; i < people; i++)
+				//	printf("%d ", prisoner[i]);
+				//printf("\n\n");
+			}
+			else 
+				index++;
+			
+
+			if (killcounter == people - 1)
+				break;
+		}
+
+		for (int j = 0; j < people; j++)
+			if (prisoner[j] == 0)
+				printf("Case %d: %d\n", i + 1, j + 1);
+	}
+	//system("PAUSE");
+	return 0;
+}
