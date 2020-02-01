@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable: 4996)
+
+int main() {
+
+	char input[10000];
+	char delim[] = " ";
+	int test = 1;
+
+	scanf("%d*c", input);//temp
+	fgets(input, 10000, stdin);
+	
+	while (fgets(input, 10000, stdin)!=NULL) {
+
+		if (input[0] == 10){
+			if (test > 1)
+				printf("\n");
+			printf("Case #%d:\n", test);
+			test++;
+		}
+		else {
+			input[strlen(input) - 1] = 0;
+			char *ptr = strtok(input, delim);
+
+			int counter = 0;
+			while (ptr != NULL) {
+				if (strlen(ptr) >= counter + 1) {
+					printf("%c", ptr[counter]);
+					counter++;
+				}
+				ptr = strtok(NULL, delim);
+			}
+			printf("\n");
+		}
+	}
+
+	//system("pause");
+	return 0;
+}
