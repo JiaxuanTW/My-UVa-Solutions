@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int main() {
+
+	int lenghth;
+	int squence[100];
+	int IsB2;
+	int test = 1;
+	
+	while (scanf("%d", &lenghth) != EOF) {
+
+		for (int i = 0; i < lenghth; i++)
+			scanf("%d", &squence[i]);
+
+		int combi[20000] = { 0 };
+		IsB2 = 1;
+		for (int i = 0; i < lenghth; i++) {
+			for (int j = i; j < lenghth; j++) {
+				//printf("[%d],%d + [%d],%d = %d\n", i, squence[i], j, squence[j], squence[i] + squence[j]);
+				if (combi[squence[i] + squence[j]] == 1) {
+					IsB2 = 0;
+					break;
+				}
+				combi[squence[i] + squence[j]] = 1;
+			}
+			if (IsB2 == 0) break;
+		}
+		
+		if (IsB2)
+			printf("Case #%d: It is a B2-Sequence.\n", test);
+		else
+			printf("Case #%d: It is not a B2-Sequence.\n", test);
+		
+		test++;
+	}
+
+	//system("pause");
+	return 0;
+}
