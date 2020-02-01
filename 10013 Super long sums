@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+int main() {
+	
+	int digit;
+	int result[1000];
+	int index;
+	int CheckIndex;
+	int num1, num2;
+
+	scanf("%d", &digit);
+	index = 0;
+	for (int i = 0; i < digit; i++) {
+
+		scanf("%d", &num1);
+		scanf("%d", &num2);
+
+		result[index] = num1 + num2;
+
+		if (num1 + num2 >= 10) {
+			CheckIndex = index;
+			while (CheckIndex) {
+
+				if (result[CheckIndex] >= 10) {
+					result[CheckIndex] -= 10;
+					result[CheckIndex - 1] += 1;
+				}
+				CheckIndex--;
+			}
+		}
+
+		index++;
+	}
+
+	for (int i = 0; i < digit; i++)
+		printf("%d", result[i]);
+	printf("\n");
+
+	system("pause");
+	return 0;
+}
