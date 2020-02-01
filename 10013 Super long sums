@@ -5,7 +5,7 @@
 int main() {
 	
 	int digit;
-	int result[1000000];
+	int result[100000];
 	int index;
 	int CheckIndex;
 	int num1, num2;
@@ -39,10 +39,10 @@ int main() {
 
 		for (int i = 0; i < digit; i++)
 			printf("%d", result[i]);
-		printf("\n");
+		printf("\n\n");
 		
 		test--;
 	}
-	//system("pause");
+	system("pause");
 	return 0;
 }
