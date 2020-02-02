@@ -21,7 +21,7 @@ void Reverse(char str[]) {
 
 int main() {
 
-	char HexList[] = "0123456789ABCDE";
+	char HexList[] = "0123456789ABCDEF";
 	char input[100];
 	
 	char hex[100];
@@ -56,7 +56,7 @@ int main() {
 			int index = 0;
 			dec = atoi(input);
 			while (dec>0) {
-
+	
 				HexOutput[index] = HexList[dec % 16];
 				dec /= 16;
 				index++;
