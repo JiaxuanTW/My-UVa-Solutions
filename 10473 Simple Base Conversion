@@ -1,0 +1,70 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+int HexPow(int x) {
+	int result = 1;
+	for (int i = 1;i <= x;i++) {
+		result *= 16;
+	}
+	return result;
+}
+
+void Reverse(char str[]) {
+	for (int i = 0; i < strlen(str) / 2; i++) {
+		char temp = str[i];
+		str[i] = str[strlen(str) - i - 1];
+		str[strlen(str) - i - 1] = temp;
+	}
+}
+
+int main() {
+
+	char HexList[] = "0123456789ABCDE";
+	char input[100];
+	
+	char hex[100];
+	int DecOutput;
+	int dec;
+	char HexOutput[100];
+
+	while (1) {
+
+		scanf("%s", input);
+		if (input[1] == 'x') {
+
+			char *ptr = input;
+			strcpy(hex, ptr + 2);
+			int counter = 0;
+			DecOutput = 0;
+			for (int i = strlen(hex) - 1; i >= 0; i--) {
+				
+				if (hex[i] >= 'A' && hex[i] <= 'F')
+					DecOutput += (hex[i] - 55) * HexPow(counter);
+				else if(hex[i] >= 'a' && hex[i] <= 'f')
+					DecOutput += (hex[i] - 87) * HexPow(counter);
+				else
+					DecOutput += (hex[i] - 48) * HexPow(counter);
+				counter++;
+			}
+			printf("%d\n", DecOutput);
+		}
+		else if (input[0] == '-')
+			return 0;
+		else {
+			int index = 0;
+			dec = atoi(input);
+			while (dec>0) {
+
+				HexOutput[index] = HexList[dec % 16];
+				dec /= 16;
+				index++;
+			}
+			HexOutput[index] = '\0';
+			Reverse(HexOutput);
+			printf("0x%s\n", HexOutput);
+		}
+	}
+	return 0;
+}
