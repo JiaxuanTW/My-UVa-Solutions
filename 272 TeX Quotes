@@ -1,0 +1,40 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/*
+【題號】
+	272, TeX Quotes
+
+【題目大意】
+	輸入不等長字串，輸出原始輸入的字串，但是有包含 " 字元時
+	從前面數來第奇數個出現則輸出為``而第偶數個出現則輸出為''
+
+【解題思維】
+	用getchar取得字元（input）
+	若是第一次 " 就輸出``
+	第二次則輸出''
+	兩次用完（flag）歸零!
+	其餘皆輸出原字元
+*/
+
+int main() {
+
+	char input;
+	int flag = 0;
+
+	while ((input = getchar()) != EOF) {
+		if (input == '"') {
+			if (flag == 1) {
+				printf("''");
+				flag = 0;
+			}
+			else {
+				printf("``");
+				flag = 1;
+			}
+		}
+		else
+			printf("%c", input);
+	}
+	return 0;
+}
