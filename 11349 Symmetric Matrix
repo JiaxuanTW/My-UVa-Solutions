@@ -1,0 +1,61 @@
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+/*
+【題號】
+	11349, Symmetric Matrix
+
+【題目大意】
+	檢查題目所給的方陣是否以中心對稱
+	注意：矩陣中不可以出現負數!
+
+【解題思維】
+	flag用於表示是否對稱，符合(1)、不符合(0)
+	讀取題目所給之方陣到matrix[][]中，遇到負數則flag=0
+	必較方陣個元素與其以中心對面的元素是否相同，遇不同則flag=0，跳離
+	最後依題目要求輸出
+*/
+
+int main() {
+
+	int test_case, count_case = 1;
+	int n, flag; // n 表示方陣的列（行）數
+	char temp[100];
+	long long matrix[100][100];
+
+	cin >> test_case;
+	while (count_case <= test_case) {
+
+		cin >> temp >> temp >> n; //利用temp來讀取題目中的不需要的字元
+
+		flag = 1;
+
+		for (int i = 0; i<n; i++) {
+			for (int j = 0; j<n; j++) {
+				cin >> matrix[i][j];
+				if (matrix[i][j]<0)
+					flag = 0;
+			}
+		}
+
+		if (flag == 1) {
+			for (int i = 0; i<n; i++) {
+				for (int j = 0; j<n; j++) {
+					if (matrix[i][j] != matrix[n - i - 1][n - j - 1]) {
+						flag = 0;
+						break;
+					}
+				}
+			}
+		}
+
+		if (flag == 1) 
+			cout << "Test #" << count_case << ": Symmetric." << endl;
+		else 
+			cout << "Test #" << count_case << ": Non-symmetric." << endl;
+		count_case++;
+	}
+	return 0;
+}
