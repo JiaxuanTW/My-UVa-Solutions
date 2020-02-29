@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	10035, Primary Arithmetic
+
+【題目大意】
+	求題目所給之兩數相加的過程中，產生進位（carry）的次數？
+
+【解題思維】
+	從個位數開始相加，num1個位數 + mum2個位數 + carry 若大於等於 10
+	就表示需要進位，counter++，十位數相加時需要再加 1
+	反之，若沒有超過，即不需要進位
+	
+	變數 carry 表示該位數相加時是否產生進位
+	若需要進位，將在下一位數相加時再加 1
+*/
+
+int main() {
+
+	int num1, num2, carry, counter;
+
+	while (1) {
+
+		cin >> num1 >> num2;
+		if (num1 == 0 && num2 == 0) break;
+
+		carry = 0;
+		counter = 0;
+
+		while (1) {
+
+			if (num1 % 10 + num2 % 10 + carry >= 10) {
+				counter++;
+				carry = 1;
+			}
+			else
+				carry = 0;
+
+			num1 /= 10;
+			num2 /= 10;
+
+			if (num1 == 0 && num2 == 0) break;
+		}
+
+		if (counter == 0)
+			cout << "No carry operation." << endl;
+		else if (counter == 1)
+			cout << "1 carry operation." << endl;
+		else
+			cout << counter << " carry operations." << endl;
+	}
+
+	return 0;
+}
