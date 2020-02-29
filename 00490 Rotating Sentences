@@ -33,7 +33,9 @@ int main() {
 				break;
 			temp++;
 		}
-		charlen[counter] = temp - 1;
+		temp--;
+
+		charlen[counter] = temp;
 		if (temp > max_length)
 			max_length = temp;
 
