@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+#pragma warning (disable:4996)
+
+/*
+【題號】
+	10055, Hashmat the Brave Warrior
+
+【題目大意】
+	有個將軍想知道我軍與敵軍的數量差異
+	總結：輸出求相差的絕對值
+	注意：需使用長整數
+
+【解題思維】
+	將輸入的二數，相減來獲得差值
+*/
+
+int main() {
+
+	long long int a, b, temp;
+
+	while (scanf("%lld%lld", &a, &b) != EOF) {
+
+		if (a > b) { //make sure that b > a
+			temp = a;
+			a = b;
+			b = temp;
+		}
+
+		printf("%lld\n", b - a);
+	}
+	return 0;
+}
