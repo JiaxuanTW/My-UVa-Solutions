@@ -1,0 +1,53 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning (disable:4996)
+
+/*
+【題號】
+	490, Rotating Sentences
+
+【題目大意】
+	將輸入之多行字串轉90度
+
+【解題思維】
+	輸入所有字串到input[][]
+	並紀錄每行字串的長度（charlen[]）
+	同時更新最長字串的長度
+	輸出時調整迴圈條件，不足長度補上空白
+*/
+
+int main() {
+
+	char input[200][205];
+	int charlen[200];
+	int counter = 0;
+	int max_length = 0;
+	int temp;
+
+	while (fgets(input[counter], 205, stdin) != NULL) {
+
+		temp = 0;
+		while (1) {
+			if (input[counter][temp] == '\0')
+				break;
+			temp++;
+		}
+		charlen[counter] = temp - 1;
+		if (temp > max_length)
+			max_length = temp;
+
+		counter++;
+	}
+
+	for (int i = 0; i < max_length; i++) {
+		for (int j = counter - 1; j >= 0; j--) {
+			if (i >= charlen[j])
+				printf(" ");
+			else
+				printf("%c", input[j][i]);
+		}
+		printf("\n");
+	}
+	return 0;
+}
