@@ -1,0 +1,76 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	10419, Die Game
+
+【題目大意】
+	找出骰子經過選轉後，正面數字(骰子由上往下看)為多少。
+
+【解題思維】
+	初始化陣列dice[]六個面的數字
+	利用函式改變數字，模擬骰子轉動
+*/
+
+int temp;
+
+void north(int a[]) {
+	temp = a[1];
+	a[1] = a[5];
+	a[5] = a[6];
+	a[6] = a[2];
+	a[2] = temp;
+}
+void east(int a[]) {
+	temp = a[1];
+	a[1] = a[3];
+	a[3] = a[6];
+	a[6] = a[4];
+	a[4] = temp;
+}
+void south(int a[]) {
+	temp = a[1];
+	a[1] = a[2];
+	a[2] = a[6];
+	a[6] = a[5];
+	a[5] = temp;
+}
+void west(int a[]) {
+	temp = a[1];
+	a[1] = a[4];
+	a[4] = a[6];
+	a[6] = a[3];
+	a[3] = temp;
+}
+
+int main() {
+
+	int rotation;
+	char direction[1000];
+
+	while (1) {
+
+		int dice[] = { 0,1,2,3,4,5,6 };
+
+		cin >> rotation;
+		if (rotation == 0)
+			break;
+
+		for (int i = 0; i<rotation; i++) {
+
+			cin >> direction;
+			if (direction[0] == 'n')
+				north(dice);
+			else if (direction[0] == 'e')
+				east(dice);
+			else if (direction[0] == 's')
+				south(dice);
+			else
+				west(dice);
+		}
+		cout << dice[1] << endl;
+	}
+	return 0;
+}
