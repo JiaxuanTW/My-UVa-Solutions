@@ -1,0 +1,62 @@
+#include <iostream>
+#include <cmath>
+#include <string>
+
+using namespace std;
+
+/*
+【題號】
+	10221, Satellites
+
+【題目大意】
+	給點與地面的距離（s）、圓上兩點的夾角（a）與角度單位（type）
+	求出兩點的弧長（arc）與弦長（chord）
+
+	注意：a 的單位可能是「度」或是「分」
+
+【解題思維】
+	先將半徑加上地面到中心的距離，之後根據角度單位分成兩種狀況
+	統一將單位調整成度數（1 度 = 60 分），再求弧長與弦長
+	弦長利用正弦或餘弦定理求得
+	
+	餘弦公式：c = sqrt(a^2 + b^2 - 2ab·cos(rad))
+*/
+
+#define M_PI 3.14159265358979323846
+
+int main() {
+
+	double s, a, rad, arc, chord;
+	string type;
+
+	while (cin >> s) {
+
+		cin >> a;
+		cin >> type;
+
+		s = s + 6440;
+
+		if (type == "min") {
+
+			a = a / 60;
+			arc = 2 * s * a * M_PI / 360;
+			printf("%f ", arc);
+
+			a = a / 2;
+			rad = a * M_PI / 180;
+			chord = 2 * s * sin(rad);
+			printf("%f\n", chord);
+		}
+		else {
+
+			arc = 2 * s * a * M_PI / 360;
+			printf("%f ", arc);
+
+			a = a / 2;
+			rad = a * M_PI / 180;
+			chord = 2 * s * sin(rad);
+			printf("%f\n", chord);
+		}
+	}
+	return 0;
+}
