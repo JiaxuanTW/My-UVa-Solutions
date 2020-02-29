@@ -1,0 +1,57 @@
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+
+using namespace std;
+
+/*
+【題號】
+	10252, Common Permutation
+
+【題目大意】
+	必較 a、b 字串，找出重複的字元
+	並依字母順序（可重複）印出
+
+	注意：輸入字串可能是空白字串
+
+【解題思維】
+	利用getline讀取 a & b 字串
+	以letter_a[] & letter_b[]來存放 a & b 中出現的字元
+	輸出時依照字母順序，若letter_a[i]與letter_b[i]皆有數字代表重複
+	檢查此字母在 a & b 中重複出現的次數，輸出最小情況
+*/
+
+
+int main() {
+
+	char a[1005], b[1005];
+
+	while (cin.getline(a, 1005)) {
+
+		cin.getline(b, 1005);
+
+		int letter_a[26] = { 0 }, letter_b[26] = { 0 };
+
+		for (int i = 0; i < strlen(a); i++) {
+			int temp = a[i] - 97;
+			if (temp >= 0)
+				letter_a[temp]++;
+		}
+
+		for (int i = 0; i < strlen(b); i++) {
+			int temp = b[i] - 97;
+			if (temp >= 0)
+				letter_b[temp]++;
+		}
+
+		for (int i = 0; i < 26; i++) {
+			if (letter_a[i] > 0 && letter_b[i] > 0) {
+				for (int j = 0; j < min(letter_a[i], letter_b[i]); j++) {
+					printf("%c", 97 + i);
+				}
+			}
+		}
+		cout << endl;
+	}
+	return 0;
+}
