@@ -1,0 +1,45 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+/*
+【題號】
+	10041, Vito's family
+
+【題目大意】
+	有個人有很多親戚，他常常去拜訪他們
+	而他想找一間離所有親戚家最近的房子
+	使得他拜訪所有親戚時
+	距離的總和是最小值
+
+	總結：求每一點離排序後中位距離之合
+
+【解題思維】
+	將位置輸入loacation[]
+	對location[]進行排序
+	將每個點離中位之距離加總紀錄於變數sum
+*/
+
+int main() {
+
+	int test_case, relatives; //relatives表示位置個數
+	int location[30005];
+
+	cin >> test_case;
+	for (int i = 0; i < test_case; i++) {
+
+		cin >> relatives;
+		for (int i = 0; i < relatives; i++)
+			cin >> location[i];
+
+		sort(location, location + relatives);
+
+		int sum = 0;
+		for (int i = 0; i < relatives; i++)
+			sum = sum + abs(location[i] - location[relatives / 2]);
+
+		cout << sum << endl;
+	}
+	return 0;
+}
