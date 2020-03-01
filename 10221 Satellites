@@ -13,12 +13,13 @@ using namespace std;
 	求出兩點的弧長（arc）與弦長（chord）
 
 	注意：a 的單位可能是「度」或是「分」
+	注意：角度使用銳角（<=180）
 
 【解題思維】
 	先將半徑加上地面到中心的距離，之後根據角度單位分成兩種狀況
 	統一將單位調整成度數（1 度 = 60 分），再求弧長與弦長
 	弦長利用正弦或餘弦定理求得
-	
+
 	餘弦公式：c = sqrt(a^2 + b^2 - 2ab·cos(rad))
 */
 
@@ -27,7 +28,7 @@ using namespace std;
 int main() {
 
 	double s, a, rad, arc, chord;
-	string type;
+	char type[5];
 
 	while (cin >> s) {
 
@@ -36,9 +37,10 @@ int main() {
 
 		s = s + 6440;
 
-		if (type == "min") {
+		if (type[0] == 'm') {
 
 			a = a / 60;
+			if (a > 180) a = 360 - a;
 			arc = 2 * s * a * M_PI / 360;
 			printf("%f ", arc);
 
@@ -48,7 +50,8 @@ int main() {
 			printf("%f\n", chord);
 		}
 		else {
-
+			
+			if (a > 180) a = 360 - a;
 			arc = 2 * s * a * M_PI / 360;
 			printf("%f ", arc);
 
