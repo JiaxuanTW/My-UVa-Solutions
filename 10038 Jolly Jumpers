@@ -1,0 +1,44 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	10038, Jolly Jumpers
+
+【題目大意】
+	簡單來說就是兩兩相差的值要介於1~(n-1)之間
+	值不可於重複且每一個值都要有
+
+【解題思維】
+	開一個陣列（NumList[]）儲存兩兩差值出現次數
+	最後迴圈檢查NumList[]之 1 ~ n-1
+	若出現次數為0或次數超過1皆不是Jolly
+*/
+
+int main() {
+	
+	int lenghth, squence[3000];
+	int NumList[3000] = { 0 };
+
+	while (cin >> lenghth) {
+
+		memset(NumList, 0, sizeof(NumList));
+		for (int i = 0; i < lenghth; i++) {
+			cin >> squence[i];
+			if (i >= 1)
+				NumList[abs(squence[i] - squence[i - 1])]++;
+		}
+
+		bool isJolly = true;
+		for (int i = 1; i < lenghth; i++) {
+			if (NumList[i] > 1 || NumList[i] == 0) {
+				cout << "Not jolly" << endl;
+				isJolly = false;
+				break;
+			}
+		}
+		if (isJolly) cout << "Jolly" << endl;
+	}
+	return 0;
+}
