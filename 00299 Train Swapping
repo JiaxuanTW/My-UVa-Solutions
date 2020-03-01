@@ -1,0 +1,37 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	299, Train Swapping
+【題目大意】
+	有一列火車（lenOfTrain個車廂）需要排序，求需要調換幾次車廂
+【解題思維】
+	寫一般的氣泡排序法計算交換次數即可
+*/
+
+int main() {
+	
+	int test_cases, lenOfTrain, carriges[50], counter;
+	
+	cin >> test_cases;
+	while (test_cases--) {
+
+		counter = 0;
+		cin >> lenOfTrain;
+		for (int i = 0; i < lenOfTrain; i++)
+			cin >> carriges[i];
+
+		for (int i = lenOfTrain-1; i >= 0; i--) {
+			for (int j = 0; j < i; j++) {
+				if (carriges[j] > carriges[j + 1]) {
+					swap(carriges[j], carriges[j + 1]);
+					counter++;
+				}
+			}
+		}
+		cout << "Optimal train swapping takes " << counter << " swaps."<< endl;
+	}
+	return 0;
+}
