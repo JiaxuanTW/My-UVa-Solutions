@@ -1,0 +1,76 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+/*
+【題號】
+	118, Mutant Flatworld Explorers
+	
+【題目大意】
+	在一個 n × m 的棋盤上，有許多的機器人
+	每一個機器人會依序給定「起始座標」與「面朝方向」
+	並給定一串移動的指令 (包含：向右轉向、向左轉向、向前移動)
+	希望求得在這一串指令過後，該機器人的座標與面朝方向
+	
+	注意：	在機器人移動的過程中
+			若機器人移動至邊界外則會掉落棋盤外
+			需註記發生掉落前的座標與面朝方向
+			並且之後的其他機器人都不能走到該座標
+
+【解題思維】
+	利用陣列 fallOutPosition[][] 儲存會LOST的位置
+	需要將座標系往右往上移動各1格以模擬機器人走到-1的情況
+	robotX、robotY 更新機器人位置
+	robotFace 更新機器人面向
+	發現會LOST的指令即跳過
+*/
+
+int main() {
+
+	int boxWeight, boxHeight;
+	int fallOutPosition[55][55] = { 0 };
+	int robotX, robotY;
+	char robotFace;
+	char instruction[105];
+	bool isFallOut;
+	
+	cin >> boxWeight >> boxHeight;
+	while (cin >> robotX >> robotY >> robotFace >> instruction) {
+		isFallOut = 0;
+		for (int i = 0; i < strlen(instruction); i++) {
+			if (instruction[i] == 'R') {
+				if (robotFace == 'N') robotFace = 'E';
+				else if (robotFace == 'S') robotFace = 'W';
+				else if (robotFace == 'E') robotFace = 'S';
+				else if (robotFace == 'W') robotFace = 'N';
+			}
+			else if (instruction[i] == 'L') {
+				if (robotFace == 'N') robotFace = 'W';
+				else if (robotFace == 'S') robotFace = 'E';
+				else if (robotFace == 'E') robotFace = 'N';
+				else if (robotFace == 'W') robotFace = 'S';
+			}
+			else if (instruction[i] = 'F'){
+				if (robotFace == 'N' && fallOutPosition[robotX+1][robotY+1 + 1] == 0) robotY++;
+				else if (robotFace == 'S' && fallOutPosition[robotX+1][robotY+1 - 1] == 0) robotY--;
+				else if (robotFace == 'E' && fallOutPosition[robotX+1 + 1][robotY+1] == 0) robotX++;
+				else if (robotFace == 'W' && fallOutPosition[robotX+1 - 1][robotY+1] == 0) robotX--;
+			}
+			
+			if (robotX > boxWeight || robotX < 0 || robotY > boxHeight || robotY < 0) {
+				fallOutPosition[robotX+1][robotY+1] = 1;
+				if (robotX > boxWeight) robotX--;
+				if (robotX < 0) robotX++;
+				if (robotY > boxHeight) robotY--;
+				if (robotY < 0) robotY++;
+				cout << robotX << " " << robotY << " " << robotFace << " LOST" << endl;
+				isFallOut = 1;
+				break;
+			}
+		}
+		if(!isFallOut)
+			cout << robotX << " " << robotY << " " << robotFace << endl;
+	}
+	return 0;
+}
