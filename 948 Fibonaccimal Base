@@ -1,0 +1,53 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	948, Fibonaccimal Base
+
+【題目大意】
+	一個「十進位」轉成「費氏級數進位」的程式
+
+
+【解題思維】
+	先建立費式數列表（經測試建到fib(40)即可）
+	從不大於輸入之最接近的fib中
+	逐一往下減去，直到fib(1)為止
+*/
+
+int fib[45] = { 0, 1, 1 };
+void createFib() {
+	for (int i = 3; i <= 40; i++)
+		fib[i] = fib[i - 1] + fib[i - 2];
+}
+
+int main() {
+	
+	createFib();
+	int testCases, input;
+
+	cin >> testCases;
+	while (testCases--) {
+
+		int result[45] = { 0 };
+		cin >> input;
+		cout << input << " = ";
+		for (int i = 40; i >= 2; i--) {
+			if (input - fib[i] >= 0) {
+				input -= fib[i];
+				result[i] = 1;
+			}
+		}
+
+		bool isFirstDigit = false;
+		for (int i = 40; i >= 2; i--) {
+			if (result[i] == 1)
+				isFirstDigit = true;
+			if (isFirstDigit)
+				cout << result[i];
+		}
+		cout << " (fib)" << endl;
+	}
+	return 0;
+}
