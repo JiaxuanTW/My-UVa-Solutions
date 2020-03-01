@@ -1,0 +1,41 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	11417, GCD
+
+【題目大意】
+	寫出GCD套用在題目給的算法中
+
+【解題思維】
+	用輾轉相除法
+*/
+
+int GCD(int num1, int num2) {
+	if (num2 > num1)
+		swap(num1, num2);
+	while (num2!=0)
+	{
+		int temp = num2;
+		num2 = num1 % num2;
+		num1 = temp;
+	}
+	return num1;
+}
+
+int main() {
+
+	int n, G;
+	while (cin >> n) {
+		if (n == 0) break;
+
+		G = 0;
+		for (int i = 1; i < n; i++)
+			for (int j = i + 1; j <= n; j++)
+				G += GCD(i, j);
+		cout << G << endl;
+	}
+	return 0;
+}
