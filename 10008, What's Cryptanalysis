@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+/*
+【題號】
+	10008, What's Cryptanalysis
+
+【題目大意】
+	統計字母出現的頻率，由頻率大的輸出到小的
+	如果頻率相同，則由字母小的先輸出。
+	
+	注意：字母大小寫是一樣的
+	注意：輸入可能是空白行或包含Space
+
+【解題思維】
+	輸入資料後統計字母出現次數並儲存到 letters[] 陣列
+	輸出時從 26 ~ 1 跑迴圈，遇到相同值則印出
+*/
+
+int main() {
+
+	int rows;
+	char input;
+	int letters[26] = { 0 };
+
+	scanf("%d%c", &rows, &input);
+	for(int i = 0; i < rows; i++) {
+		while (true) {
+			input = getchar();
+			if (input >= 65 && input <= 65 + 26)
+				letters[input - 65]++;
+			else if (input >= 97 && input <= 97 + 26)
+				letters[input - 97]++;
+			else if (input == 10) break;
+		}
+	}
+	for (int i = 26; i >= 1; i--)
+		for (int j = 0; j <= 25; j++)
+			if (letters[j] == i)
+				printf("%c %d\n", j + 65, letters[j]);
+	return 0;
+}
