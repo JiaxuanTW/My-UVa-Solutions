@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+/*
+【題號】
+	10222, Decode the Mad man
+
+【題目大意】
+	將測資重新以鍵盤位移兩鍵輸出
+	注意：輸入包含大小寫字元
+
+【解題思維】
+	建立字串以輸出
+*/
+
+int main() {
+
+	char keyBoard[] = "qwertyuiop[]asdfghjkl;'zxcvbnm,./";
+	char input[1000];
+
+	fgets(input, 1000, stdin);
+	for (int i = 0; i < strlen(input) - 1; i++) {
+		if (input[i] >= 65 && input[i] <= 90)
+			input[i] += 32;
+
+		if (input[i] != 32) {
+			for (int j = 0; j < strlen(keyBoard); j++)
+				if (input[i] == keyBoard[j]) {
+					cout << keyBoard[j - 2];
+					break;
+				}
+		}
+		else
+			cout << " ";
+	}
+	cout << endl;
+	return 0;
+}
