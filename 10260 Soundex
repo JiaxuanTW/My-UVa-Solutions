@@ -1,0 +1,78 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+int main() {
+
+	char input[100];
+	int presentDigit;
+	int previousDigit;
+	while (cin >> input) {
+		presentDigit = 0;
+		previousDigit = 0;
+		for (int i = 0; i < strlen(input); i++) {			
+			switch (input[i])
+			{
+			case 'B':
+			case 'F':
+			case 'P':
+			case 'V':
+				presentDigit = 1;
+				if (presentDigit != previousDigit) {
+					previousDigit = 1;
+					cout << "1";
+				}
+				break;
+			case 'C':
+			case 'G':
+			case 'J':
+			case 'K':
+			case 'Q':
+			case 'S':
+			case 'X':
+			case 'Z':
+				presentDigit = 2;
+				if (presentDigit != previousDigit) {
+					previousDigit = 2;
+					cout << "2";
+				}
+				break;
+			case 'D':
+			case 'T':
+				presentDigit = 3;
+				if (presentDigit != previousDigit) {
+					previousDigit = 3;
+					cout << "3";
+				}
+				break;
+			case 'L':
+				presentDigit = 4;
+				if (presentDigit != previousDigit) {
+					previousDigit = 4;
+					cout << "4";
+				}
+				break;
+			case 'M':
+			case 'N':
+				presentDigit = 5;
+				if (presentDigit != previousDigit) {
+					previousDigit = 5;
+					cout << "5";
+				}
+				break;
+			case 'R':
+				presentDigit = 6;
+				if (presentDigit != previousDigit) {
+					previousDigit = 6;
+					cout << "6";
+				}
+				break;
+			default:
+				previousDigit = 0;
+			}
+		}
+		cout << endl;
+	}
+	return 0;
+}
