@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+/*
+【題號】
+	10420, List of Conquests
+
+【題目大意】
+	統計國家數量，並依照字母排序輸出
+
+【解題思維】
+	只拿國家名稱，對字串排序，統計後才輸出
+
+【解題心得】
+	這題真的會搞死我，原本想法是用struct同時存國家名
+	並同時累計次數，最後才氣泡排序，但沒想到出現TLE
+	耗時3小時在一題看似簡單到不行的題目...
+*/
+
+int main() {
+
+	int testCases;
+	string countryName[2000];
+	char temp[80];
+
+	cin >> testCases;
+	for (int i = 0; i < testCases; i++) {
+		cin >> countryName[i];
+		fgets(temp, 80, stdin);
+	}
+
+	sort(countryName, countryName + testCases);
+
+	for (int i = 0, j; i < testCases; i = j) {
+		cout << countryName[i] << " ";
+		int counter = 1;
+		for (j = i + 1; j < testCases; j++) {
+			if (countryName[i] != countryName[j])
+				break;
+			counter++;
+		}
+		cout << counter << endl;
+	}
+	return 0;
+}
