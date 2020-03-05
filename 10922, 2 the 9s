@@ -1,0 +1,53 @@
+#include <iostream>
+#include <cstring>
+#pragma warning (disable:4996)
+
+using namespace std;
+
+/*
+【題號】
+10922, 2 the 9s
+
+【題目大意】
+檢查測資是否為9的倍數
+若是，繼續找出此數的9-degree
+9-degree of N 是指一數的每個位數相加
+統計「持續此動作直到剩下9」的運算次數
+
+【解題思維】
+以字串輸入測資
+將此數之每個位數相加，存到 sum 變數
+再轉為文字型態，重複此動作並記錄次數
+*/
+
+int main() {
+
+	char input[1000];
+	int sum;
+	int counter;
+
+	while (cin >> input) {
+		if (input[0] == '0') break;
+
+		cout << input;
+		counter = 0;
+		if (strlen(input) == 1 && input[0] == '9')
+			counter++;
+		else
+		{
+			while (strlen(input) > 1) {
+				sum = 0;
+				for (int i = 0; i < strlen(input); i++)
+					sum += input[i] - 48;
+
+				sprintf(input, "%d", sum);
+				counter++;
+			}
+		}
+		if (input[0] == '9')
+			cout << " is a multiple of 9 and has 9-degree " << counter << "." << endl;
+		else
+			cout << " is not a multiple of 9." << endl;
+	}
+	return 0;
+}
