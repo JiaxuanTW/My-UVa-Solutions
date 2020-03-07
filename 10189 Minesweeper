@@ -1,0 +1,64 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	10189, Minesweeper
+
+【題目大意】
+	踩地雷，求周圍8格地雷顆數
+
+【解題思維】
+	偵測周圍8格是否有地雷
+
+【解題心得】
+	寫完才想到寫成在地雷周圍8格+1比較好
+*/
+
+int main() {
+
+	int testCases = 1;
+	int row, column;
+	char map[100][100];
+	int result[100][100];
+	
+	while (cin >> row >> column) {
+		if (row == 0) break;
+		if (testCases > 1)
+			cout << endl;
+		
+		for (int i = 0; i < row; i++)
+			for (int j = 0; j < column; j++)
+				cin >> map[i][j];
+
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < column; j++) {
+				int mineCounter = 0;
+				if (map[i][j] != '*') {
+					for (int k = i - 1; k <= i + 1; k++) {
+						for (int l = j - 1; l <= j + 1; l++) {
+							if (k >= 0 && k < row && l >= 0 && l < column) {
+								if (map[k][l] == '*')
+									mineCounter++;
+							}
+						}
+					}
+				}
+				result[i][j] = mineCounter;
+			}
+		}
+
+		cout << "Field #" << testCases << ":" << endl;
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < column; j++)
+				if (map[i][j] == '*')
+					cout << "*";
+				else
+					cout << result[i][j];
+			cout << endl;
+		}
+		testCases++;
+	}
+	return 0;
+}
