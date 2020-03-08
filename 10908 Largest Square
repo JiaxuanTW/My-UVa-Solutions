@@ -1,0 +1,59 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	10908, Largest Square
+
+【題目大意】
+	給一個由文字組成的陣列
+	與一些點說明所求Square的中心座標
+	以此中心擴散，且全為相同字元的正方形最大的邊長
+
+【解題思維】
+	對一個點周圍檢查，是否皆為相同字元
+	持續擴大檢查區域直到出現非同字元即停止
+*/
+
+int main() {
+
+	int testCases;
+	int row, column, centerPoint;
+	char square[100][100];
+
+	cin >> testCases;
+	while (testCases--) {
+
+		cin >> row >> column >> centerPoint;
+		cout << row << " " << column << " " << centerPoint << endl;
+
+		for (int i = 0; i < row; i++)
+			for (int j = 0; j < column; j++)
+				cin >> square[i][j];
+
+		for (int i = 0; i < centerPoint; i++) {
+
+			int x, y, counter = -1;
+			int detect = 0;
+			bool isCompleteSquare = true;
+			cin >> x >> y;
+
+			while (isCompleteSquare) {
+				for (int m = x - detect; m <= x + detect; m++) {
+					for (int n = y - detect; n <= y + detect; n++) {
+						if (m < 0 || m >= row || n < 0 || n >= column)
+							isCompleteSquare = false;
+						else if (square[m][n] != square[x][y])
+							isCompleteSquare = false;
+					}
+				}
+				if (isCompleteSquare)
+					counter += 2;
+				detect++;
+			}
+			cout << counter << endl;
+		}
+	}
+	return 0;
+}
