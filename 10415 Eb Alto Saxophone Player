@@ -1,0 +1,78 @@
+#include <iostream>
+#include <cstring>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+/*
+【題號】
+	10415, Eb Alto Saxophone Player
+
+【題目大意】
+	求出拇指按壓按鈕的次數
+	注意：拇指按下抬起後才算是1次
+
+【解題思維】
+	模擬操作，先對資料進行預處裡
+	比較當下按鍵與上一次按鍵差異
+	若上次按下，本次放開，則累計次數
+	還有首次與末次動作的累計
+
+	注意：測資包含空白
+*/
+
+int main() {
+
+	int testCases;
+	char input;
+	
+	char table[14][12]{
+		"0110000000a",
+		"0100000000b",
+		"0111001111c",
+		"0111001110d",
+		"0111001100e",
+		"0111001000f",
+		"0111000000g",
+		"1110000000A",
+		"1100000000B",
+		"0010000000C",
+		"1111001110D",
+		"1111001100E",
+		"1111001000F",
+		"1111000000G",
+	};
+
+	cin >> testCases;
+	getchar();
+	while (testCases--) {
+		int finger[10] = { 0 };
+		char comp[12] = "0000000000x";
+		while (input=getchar()) {
+			
+			if (input == 10) {
+
+				for (int i = 0; i < 10; i++) {
+					if (comp[i] == 49) finger[i]++;
+					if (i > 0)
+						cout << " ";
+					cout << finger[i];
+				}
+				cout << endl;
+				break;
+			}
+			else if (input != 32) {
+
+				for (int search = 0; search < 14; search++)
+					if (input == table[search][10]) {
+						for (int j = 0; j < 10; j++) 
+							if (table[search][j] == 48 && comp[j] == 49)
+								finger[j]++;
+						strncpy(comp, table[search], 10);
+						break;
+					}
+			}
+		}		
+	}
+	return 0;
+}
