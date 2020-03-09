@@ -1,0 +1,60 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+/*
+【題號】
+	10057, A mid-summer nights dream
+
+【題目大意】
+	給定一數列(X1, x2, ..., Xn)
+	求一數 A 使得(|X1-A|+|X2-A|+...+|Xn-A|)為最小
+	輸出 A 可能的最小值、滿足解條件的個數、A 可能解的個數
+
+【解題思維】
+	參見CPE祕笈p.167
+	A 可能的最小值：此數列之中位數(偶數情況較小的)
+	滿足解條件的個數：與中位數相同的數之個數
+	A 可能解的個數：偶數情況中，即較大中位數 - 較小中位數 + 1; 奇數則必為 1
+*/
+
+int main() {
+
+	int testCases;
+	int array1[1000000];
+	while (cin >> testCases) {
+		for (int i = 0; i < testCases; i++)
+			cin >> array1[i];
+		sort(array1, array1 + testCases);
+		if (testCases % 2 == 1) {
+			cout << array1[testCases / 2] << " ";
+			
+			int counter = 0;
+			//decreasing search
+			for (int i = testCases / 2; i >= 0; i--) {
+				if (array1[i] != array1[testCases / 2])
+					break;
+				counter++;
+			}
+			//increasing search
+			for (int i = testCases / 2 + 1; i < testCases; i++) {
+				if (array1[i] != array1[testCases / 2])
+					break;
+				counter++;
+			}
+			cout << counter << " 1" << endl;
+		}
+		else {
+			cout << array1[testCases / 2 - 1] << " ";
+			
+			int counter = 0;
+			for (int i = 0; i < testCases; i++) {
+				if (array1[i] == array1[testCases / 2] || array1[i] == array1[testCases / 2 - 1])
+					counter++;
+			}
+			cout << counter << " " << array1[testCases / 2] - array1[testCases / 2 - 1] + 1 << endl;
+		}
+	}
+	return 0;
+}
