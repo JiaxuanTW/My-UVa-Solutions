@@ -1,0 +1,51 @@
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+/*
+【題號】
+	10235, Simply Emirp
+
+【題目大意】
+	檢查一數是否為質數，若是，求其reverse是否也為質數
+	注意：若一質數reverse前後相同只能算是prime，不是emirp
+
+【解題思維】
+	寫質數判斷函式，解析輸入即可
+*/
+
+bool isPrime(int var) {
+	if (var == 1)
+		return false;
+	else {
+		for (int i = 2; i < var; i++)
+			if (var % i == 0)
+				return false;
+		return true;
+	}
+}
+
+int main() {
+
+	char input[20];
+	char temp[20];
+
+	while (cin >> input) {
+
+		cout << input;
+		if (isPrime(atoi(input))) {
+			strcpy(temp, input);
+			reverse(input, input + strlen(input));
+			if (isPrime(atoi(input)) && strcmp(temp, input)!=0)
+				cout << " is emirp." << endl;
+			else
+				cout << " is prime." << endl;
+		}
+		else
+			cout << " is not prime." << endl;
+	}
+	return 0;
+}
