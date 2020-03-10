@@ -1,0 +1,27 @@
+#include <iostream>
+#include <algorithm>
+#include <cstring>
+#pragma warning(disable:4996)
+
+using namespace std;
+
+/*
+【題號】
+	10071, Back to High School Physics
+
+【題目大意】
+	給一初速度，與時間，輸出兩倍時間的位移
+
+【解題思維】
+	d = v·(2t)
+*/
+
+int main() {
+
+	int velovity0;
+	int time;
+	while (cin >> velovity0 >> time) {
+		cout << 2 * velovity0*time << endl;
+	}
+	return 0;
+}
