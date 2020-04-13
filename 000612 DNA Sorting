@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#pragma warning(disable:4996)
+
+struct input{
+	char dna[105];
+	int level;
+};
+
+int main() {
+
+	int testCases;
+	int dnaNum;
+	int temp;
+	struct input ptr[100];
+
+	scanf("%d", &testCases);
+	
+	for (int i = 0; i < testCases; i++) {
+		
+		if (i > 0)
+			printf("\n");
+
+		scanf("%d%d", &temp, &dnaNum);
+		for (int i = 0; i < dnaNum; i++) {
+			scanf("%s", ptr[i].dna);
+
+			int counter = 0;
+			for (int j = 0; j < strlen(ptr[i].dna); j++) {
+				for (int k = j; k < strlen(ptr[i].dna); k++) {
+					if (ptr[i].dna[j] > ptr[i].dna[k])
+						counter++;
+				}
+			}
+			ptr[i].level = counter;
+		}
+
+		//Insertion Sort
+		//int insertion;
+		//char tempStr[105];
+		//for (int i = 0; i < dnaNum; i++) {
+		//	temp = ptr[i].level;
+		//	strcpy(tempStr, ptr[i].dna);
+		//	insertion = i - 1;
+		//	while (temp < ptr[insertion].level) {
+		//		ptr[insertion + 1].level = ptr[insertion].level;
+		//		strcpy(ptr[insertion + 1].dna, ptr[insertion].dna);
+		//		insertion--;
+		//		if (insertion == -1)
+		//			break;
+		//	}
+		//	ptr[insertion + 1].level = temp;
+		//	strcpy(ptr[insertion + 1].dna, tempStr);
+		//}
+
+		for (int i = dnaNum - 1; i >= 0; i--) {
+			for (int j = 0; j < i; j++) {
+				if (ptr[j].level > ptr[j + 1].level) {
+					char tempStr[105];
+					strcpy(tempStr, ptr[j].dna);
+					strcpy(ptr[j].dna, ptr[j + 1].dna);
+					strcpy(ptr[j + 1].dna, tempStr);
+
+					temp = ptr[j].level;
+					ptr[j].level = ptr[j + 1].level;
+					ptr[j + 1].level = temp;
+				}
+			}
+		}
+		
+		for (int i = 0; i < dnaNum; i++)
+			printf("%s\n", ptr[i].dna, ptr[i].level);
+	}
+	//system("pause");
+	return 0;
+}
