@@ -1,0 +1,24 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	11150, Cola
+
+【題目大意】
+	每三個空瓶可以換一瓶可樂，問如何喝到最多瓶可樂
+	空瓶可以跟朋友借，但是最後要還回去
+
+【解題思維】
+	找規律後可以發現 n * 1.5 強轉 int 即解答
+*/
+
+int main() {
+
+	int n;
+	while (cin >> n)
+		cout << int(n * 1.5) << endl;
+	//system("PAUSE");
+	return 0;
+}
