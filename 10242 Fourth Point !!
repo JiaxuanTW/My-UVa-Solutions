@@ -1,0 +1,53 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+/*
+【題號】
+	10242, 
+
+【題目大意】
+	求平行四邊形第四點
+
+【解題思維】
+	向量相加
+*/
+
+struct point{
+	double x;
+	double y;
+};
+
+void innerProduct(double baseX, double baseY, double x1, double y1, double x2, double y2);
+
+int main() {
+
+	point object[4];
+	while (cin >> object[0].x >> object[0].y) {
+		cin >> object[1].x >> object[1].y;
+		cin >> object[2].x >> object[2].y;
+		cin >> object[3].x >> object[3].y;
+
+		if (object[2].x == object[0].x && object[2].y == object[0].y)
+			innerProduct(object[2].x, object[2].y, object[1].x, object[1].y, object[3].x, object[3].y);
+		else if (object[2].x == object[1].x && object[2].y == object[1].y)
+			innerProduct(object[2].x, object[2].y, object[0].x, object[0].y, object[3].x, object[3].y);
+		else if (object[3].x == object[0].x && object[3].y == object[0].y)
+			innerProduct(object[3].x, object[3].y, object[1].x, object[1].y, object[2].x, object[2].y);
+		else if (object[3].x == object[1].x && object[3].y == object[1].y)
+			innerProduct(object[3].x, object[3].y, object[0].x, object[0].y, object[2].x, object[2].y);
+	}
+	return 0;
+}
+
+void innerProduct(double baseX, double baseY, double x1, double y1, double x2, double y2)
+{
+	point vector[2];
+	vector[0].x = x1 - baseX;
+	vector[0].y = y1 - baseY;
+	vector[1].x = x2 - baseX;
+	vector[1].y = y2 - baseY;
+	cout << fixed << setprecision(3) << vector[0].x + vector[1].x + baseX << " " << vector[0].y + vector[1].y + baseY << endl;
+}
