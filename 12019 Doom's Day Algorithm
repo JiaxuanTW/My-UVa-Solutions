@@ -1,0 +1,112 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	12019, Doom's Day Algorithm
+
+【題目大意】
+	利用題目給的資訊，來搜尋2011年的某一日是星期幾？
+
+【解題思維】
+	模擬運算
+*/
+
+int computeDays(int standard, int target, int day) {
+	int counter = day;
+	if (target > standard) {
+		for (int i = standard; i < target; i++) {
+			counter++;
+			if (counter > 7)
+				counter = 1;
+		}
+		return counter;
+	}
+	else if (target == standard)
+		return day;
+	else {
+		for (int i = standard; i > target; i--) {
+			counter--;
+			if (counter < 1)
+				counter = 7;
+		}
+		return counter;
+	}
+}
+
+int main() {
+
+	int testNum;
+	int month, day;
+	int result;
+
+	cin >> testNum;
+	for (int i = 0; i < testNum; i++) {
+		cin >> month >> day;
+		switch (month) {
+		case 1:
+			result = computeDays(10, day, 1);
+			break;
+		case 2:
+			result = computeDays(21, day, 1);
+			break;
+		case 3:
+			result = computeDays(1, day, 2);
+			break;
+		case 4:
+			result = computeDays(4, day, 1);
+			break;
+		case 5:
+			result = computeDays(9, day, 1);
+			break;
+		case 6:
+			result = computeDays(6, day, 1);
+			break;
+		case 7:
+			result = computeDays(11, day, 1);
+			break;
+		case 8:
+			result = computeDays(8, day, 1);
+			break;
+		case 9:
+			result = computeDays(5, day, 1);
+			break;
+		case 10:
+			result = computeDays(10, day, 1);
+			break;
+		case 11:
+			result = computeDays(7, day, 1);
+			break;
+		case 12:
+			result = computeDays(12, day, 1);
+			break;
+		}
+		switch (result)
+		{
+		case 1:
+			cout << "Monday" << endl;
+			break;
+		case 2:
+			cout << "Tuesday" << endl;
+			break;
+		case 3:
+			cout << "Wednesday" << endl;
+			break;
+		case 4:
+			cout << "Thursday" << endl;
+			break;
+		case 5:
+			cout << "Friday" << endl;
+			break;
+		case 6:
+			cout << "Saturday" << endl;
+			break;
+		case 7:
+			cout << "Sunday" << endl;
+			break;
+		}
+	}
+	//system("PAUSE");
+	return 0;
+}
