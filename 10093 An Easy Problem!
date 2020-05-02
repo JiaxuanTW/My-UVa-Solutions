@@ -1,0 +1,66 @@
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+
+/*
+【題號】
+	
+
+【題目大意】
+	給一串 N 進位的整數（輸入不會只有一個字元）
+	求最小可能的 N 為何？
+
+【解題思維】
+	求出各位數（字元）的值，加總 sum 並記錄其中最大值 max
+	若 sum 可以整除一數 R （R>max），解 N 即為 R + 1
+	若 R 超出 61 或則印出「無解」
+*/
+
+int findMax(int last, int value) {
+	if (value > last)
+		return value;
+	return last;
+}
+
+int main() {
+
+	char input[1000];
+
+	while (cin >> input) {
+
+		int sum = 0;
+		int max = 0;
+		for (int i = 0; i < strlen(input); i++) {
+			
+			if (input[i] >= '0' && input[i] <= '9') {
+				sum += input[i] - 48;
+				max = findMax(max, input[i] - 48);
+			}
+			if (input[i] >= 'A' && input[i] <= 'Z') {
+				sum += input[i] - 55;
+				max = findMax(max, input[i] - 55);
+			}
+			if (input[i] >= 'a'&& input[i] <= 'z') {
+				sum += input[i] - 61;
+				max = findMax(max, input[i] - 61);
+			}
+		}
+
+		bool isValid = false;
+		if (sum == 0)
+			cout << "2" << endl;
+		else {
+			for (int i = max; i < 62; i++) {
+				if (sum%i == 0) {
+					cout << i + 1 << endl;
+					isValid = true;
+					break;
+				}
+			}
+			if (!isValid)
+				cout << "such number is impossible!" << endl;
+		}
+	}
+	return 0;
+}
