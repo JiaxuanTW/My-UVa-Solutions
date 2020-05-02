@@ -1,0 +1,39 @@
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+/*
+【題號】
+	10812, 
+
+【題目大意】
+	給兩數和與兩數差，求此二數
+
+【解題思維】
+	解聯立，注意解不可為負
+*/
+
+int main() {
+
+	int testNum;
+	int num1, num2;
+	int result1, result2;
+	
+	cin >> testNum;
+	for (int i = 0; i < testNum; i++) {
+		cin >> num1 >> num2;
+
+		if ((num1 - num2) % 2 == 0 && (num1 - num2) >= 0) {
+			result1 = (num1 - num2) / 2;
+			result2 = result1 + num2;
+			if (result2 > result1)
+				swap(result1, result2);
+			cout << result1 << " " << result2 << endl;
+		}
+		else {
+			cout << "impossible" << endl;
+		}
+	}
+	return 0;
+}
