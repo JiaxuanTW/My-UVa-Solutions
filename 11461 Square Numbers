@@ -1,0 +1,35 @@
+#include <iostream>
+
+using namespace std;
+
+/*
+【題號】
+	11461, Square Numbers
+
+【題目大意】
+	找出一段數字區間中，有多少數的平方根是整數的
+
+【解題思維】
+	用迴圈查
+*/
+
+int main() {
+
+	int a, b;
+	int counter;
+
+	while (cin >> a >> b) {
+		if (a == 0 && b == 0)
+			break;
+
+		counter = 0;
+		for (int i = 1; i*i <= b; i++) {
+			if (i*i >= a)
+				counter++;
+		}
+		cout << counter << endl;
+	}
+
+	//system("pause");
+	return 0;
+}
