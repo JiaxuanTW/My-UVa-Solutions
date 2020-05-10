@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <map>
+
+using namespace std;
+
+/*
+【題號】
+	
+【題目大意】
+	輸入樹的種類，計算比例
+
+【解題思維】
+	利用 map 加總各種類樹的數量
+	同時加總 total 數量
+	最後 種類數量 / total * 100（百分比）
+
+	注意：空白行須利用 getchar() 與 getline() 等方式處理
+	注意：計算時注意型別轉換
+*/
+
+int main() {
+
+	int testNum;
+	int total;
+	string treeName;
+
+	cin >> testNum;
+	getchar();
+	getline(cin, treeName);
+	for (int i = 0; i < testNum; i++) {
+
+		total = 0;
+		map<string, int> cnt;
+
+		if (i > 0)
+			cout << endl;
+
+		while (getline(cin, treeName) && !treeName.empty()) {
+			cnt[treeName]++;
+			total++;
+		}
+
+		for (map<string, int>::iterator iter = cnt.begin(); \
+			iter != cnt.end(); iter++)
+			cout << iter->first << " " << fixed << setprecision(4) << \
+				(double)iter->second / total * 100 << endl;	
+	}
+	return 0;
+}
